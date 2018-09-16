@@ -124,7 +124,10 @@ bool CGameInfoLoader::GetMemoryStruct(retro_game_info& info) const
 {
   if (!m_dataBuffer.empty())
   {
-    info.path = nullptr;
+    //! @todo path is nullptr according to libretro API, but many cores expect
+    //        the frontend to set this
+    info.path = m_path.c_str();
+
     info.data = m_dataBuffer.data();
     info.size = m_dataBuffer.size();
     info.meta = nullptr;
